@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        {% for i in content %}
+            <div class="file-content">
+            <div class="file-name" style="width:25%;">{{ i.name }}</div>
+            <div class="file-size" style="width:11%;">{{ i.filesize }} B</div>
+            <div class="file-date" style="width:5%;">{{ i.downloadcount }}</div>
+            <div class="file-date" style="width:16%;">{{ i.datetime }}</div>
+            <div class="file-link" style="width:43%; padding-right: 80px; text-overflow: ellipsis; overflow: hidden;">
+                <span>
+                    https://{{ request.get_host }}/s/{{ i.code}}
+                </span>
+            </div>
+            <a href="/download/{{ i.code }}" style="color:#FFF;" download="{{ i.name }}"><button>Download</button></a>
+        </div>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
